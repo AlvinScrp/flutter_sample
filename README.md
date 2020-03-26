@@ -5,6 +5,7 @@
 ## 介绍链接
 
 - [输入框和键盘处理](https://juejin.im/post/5e7c164ae51d455c7275d353)
+	所在代码入口：main_bottom_input.dart
 
 待补充:
 基于chewie视频组件的自定义UI
