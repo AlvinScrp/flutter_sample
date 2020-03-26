@@ -1,16 +1,9 @@
 # flutter_sample
 
-A new Flutter application.
+提供一些Flutter实用的案例代码
 
-## Getting Started
+## 介绍链接
 
-This project is a starting point for a Flutter application.
+- [输入框和键盘处理](https://juejin.im/post/5e7c164ae51d455c7275d353)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
