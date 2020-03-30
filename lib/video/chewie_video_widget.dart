@@ -1,31 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sample/video/chewie2/src/chewie_player.dart';
+import 'package:flutter_sample/video/chewie_ex/custom_controls.dart';
 import 'package:video_player/video_player.dart';
 
-class NicoVideoWidget extends StatefulWidget {
+import 'chewie2/src/chewie_player.dart';
+
+class ChewieVideoWidget1 extends StatefulWidget {
   final String playUrl;
 
-  NicoVideoWidget(this.playUrl);
+  ChewieVideoWidget1(this.playUrl);
   @override
-  _NicoVideoWidgetState createState() => _NicoVideoWidgetState();
+  _ChewieVideoWidget1State createState() => _ChewieVideoWidget1State();
 }
 
-class _NicoVideoWidgetState extends State<NicoVideoWidget> {
+class _ChewieVideoWidget1State extends State<ChewieVideoWidget1> {
   VideoPlayerController _videoPlayerController;
   ChewieController _chewieController;
 
   @override
   void initState() {
     super.initState();
-
-    _videoPlayerController = VideoPlayerController.network(widget.playUrl)
-      ..initialize();
-//        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'
+    _videoPlayerController = VideoPlayerController.network(widget.playUrl);
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController,
-      aspectRatio: 3 / 2,
-      autoPlay: false,
-      looping: true,
+      autoPlay: true,
+//      aspectRatio: 3 / 2.0,
+//      customControls: CustomControls(),
     );
   }
 

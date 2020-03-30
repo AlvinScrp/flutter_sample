@@ -42,7 +42,8 @@ dependencies:
   flutter_html: ^0.11.0
   html: ^0.14.0+3
   video_player: ^0.10.2+5
-  chewie: ^0.9.8+1
+  screen: 0.0.5
+#  chewie: ^0.9.8+1
   css_text: ^0.9.9
 
 

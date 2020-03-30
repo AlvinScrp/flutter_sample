@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.nicomama.flutter_sample">
 
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
@@ -9,7 +10,9 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="flutter_sample"
-        android:icon="@mipmap/ic_launcher">
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m"
+        android:icon="@mipmap/ic">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
