@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 /// 1.泛型实现
 /// 2.不应该暴露ShareDataWidget，而是要ShareNotifierWidget 封装ShareDataWidget 获取数据
 ///
+///
+
 void main() => runApp(MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -22,6 +24,8 @@ class InheritedNotifierWidget extends StatefulWidget {
       new _InheritedNotifierWidgetState();
 }
 
+final String tag = "_InheritedNotifier";
+
 class _InheritedNotifierWidgetState extends State<InheritedNotifierWidget> {
   ShareModel _shareModel = new ShareModel(0);
 
@@ -29,7 +33,8 @@ class _InheritedNotifierWidgetState extends State<InheritedNotifierWidget> {
 
   @override
   Widget build(BuildContext context) {
-    print("_InheritedWidget build context:$context}");
+    print("$tag build context:$context}");
+    TextWidget textWidget = TextWidget();
     return Center(
       child: ShareNotifierWidget(
         notifier: _changeNotifier,
@@ -37,9 +42,10 @@ class _InheritedNotifierWidgetState extends State<InheritedNotifierWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            TextWidget(),
             Builder(
               builder: (context2) {
-                print("__TestWidgetState build context:$context2");
+                print("$tag _TestWidgetState build context:$context2");
                 return Text(
                   ShareModelWidget.of(context2).model.count.toString(),
                   style: TextStyle(fontSize: 40),
@@ -48,7 +54,7 @@ class _InheritedNotifierWidgetState extends State<InheritedNotifierWidget> {
             ),
             Builder(
               builder: (context2) {
-                print("__TestButtonState build context:$context2}");
+                print("$tag _TestButtonState build context:$context2}");
                 return RaisedButton(
                     child: Text(
                         "Increment (current:${ShareModelWidget.of(context2).model.count.toString()})"),
@@ -65,6 +71,26 @@ class _InheritedNotifierWidgetState extends State<InheritedNotifierWidget> {
         ),
       ),
     );
+  }
+}
+
+class TextWidget extends StatefulWidget {
+  @override
+  _TextWidgetState createState() => _TextWidgetState();
+}
+
+class _TextWidgetState extends State<TextWidget> {
+  @override
+  Widget build(BuildContext context) {
+    print("$tag TextWidget :BuildContext $context");
+    var count = ShareModelWidget.of(context).model.count;
+    return Text("计数:$count");
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    print("$tag TextWidget :didChangeDependencies");
   }
 }
 
@@ -88,8 +114,10 @@ class ShareModelWidget extends InheritedWidget {
 
   //定义一个便捷方法，方便子树中的widget获取共享数据
   static ShareModelWidget of(BuildContext context) {
-    return context.inheritFromWidgetOfExactType(ShareModelWidget);
-//  return context.ancestorInheritedElementForWidgetOfExactType(ShareDataWidget).widget;
+//    return context.dependOnInheritedWidgetOfExactType<ShareModelWidget>();
+    return context
+        .getElementForInheritedWidgetOfExactType<ShareModelWidget>()
+        .widget;
   }
 
   //该回调决定当data发生变化时，是否通知子树中依赖data的Widget
@@ -132,6 +160,7 @@ class _ShareNotifierWidgetState extends State<ShareNotifierWidget> {
 
   @override
   Widget build(BuildContext context) {
+    print("$tag TextWidget :didChangeDependencies");
     return ShareModelWidget(
       model: widget.model,
       notifier: widget.notifier,

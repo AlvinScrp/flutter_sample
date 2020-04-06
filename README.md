@@ -8,11 +8,16 @@
     入口：main_bottom_input.dart
 - [Flutter视频库chewie的使用]( https://juejin.im/post/5e814fd9518825738e215f0f )
     入口：main_video.dart
+    
+- [Flutter状态管理Provider(一) 简易使用](https://juejin.im/post/5e859b39f265da47c06ebaf1)
+入口：main_provider.dart
+
+- [Flutter状态管理Provider(二) 过程分析](https://juejin.im/post/5e89ad7a6fb9a03c4e64697d)
+入口：main_provider.dart
 
 ## 待补充:
 - 自定义圆角widget   y
 - Eventbus 全局事件总线使用  y
-- Provider源码解析 m
 - 基于Provider实现的开发框架  m
 - Selector研究与自定义ItemRefresher  m
 - 图片swiper组件  y
