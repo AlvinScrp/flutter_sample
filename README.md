@@ -25,5 +25,6 @@
 - OverScrollBehavior  y
 - 自定义Route:SlidePageRoute,TransparentModalRoute... y
 - 横竖屏切换问题  m
+- 1.12.13 新的build aar m
 
 
