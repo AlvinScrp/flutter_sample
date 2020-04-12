@@ -18,7 +18,7 @@
 ## 待补充:
 - 自定义圆角widget   y
 - Eventbus 全局事件总线使用  y
-- 基于Provider实现的开发框架  m
+- 基于Provider实现的开发框架  m  编辑中
 - Selector研究与自定义ItemRefresher  m
 - 图片swiper组件  y
 - 模糊使用   y
