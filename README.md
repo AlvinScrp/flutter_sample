@@ -12,7 +12,7 @@
 - [Flutter状态管理Provider(一) 简易使用](https://juejin.im/post/5e859b39f265da47c06ebaf1)
 入口：main_provider.dart
 
-- [Flutter状态管理Provider(二) 过程分析](https://juejin.im/post/5e89ad7a6fb9a03c4e64697d)
+- [Flutter状态管理Provider(二) 源码分析](https://juejin.im/post/5e89ad7a6fb9a03c4e64697d)
 入口：main_provider.dart
 
 ## 待补充:
