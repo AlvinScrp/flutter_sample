@@ -6,6 +6,8 @@ import 'package:flutter_sample/provider/provider_demo_widget4.dart';
 import 'package:flutter_sample/provider/set_state_demo_widget.dart';
 import 'package:provider/provider.dart';
 
+import 'provider/post/list/post_list_widget.dart';
+
 ///
 ///Provider V3
 ///官方推荐库
@@ -36,7 +38,8 @@ class _MainProviderWidgetState extends State<MainProviderWidget> {
           _build(context, providerDemoTitle1, ProviderDemoWidget1()),
           _build(context, providerDemoTitle2, ProviderDemoWidget2()),
           _build(context, providerDemoTitle3, ProviderDemoWidget3()),
-          _build(context, providerDemoTitle4, ProviderDemoWidget4())
+          _build(context, providerDemoTitle4, ProviderDemoWidget4()),
+          _build(context, "代码框架", PostListWidget()),
         ],
       ),
     );
