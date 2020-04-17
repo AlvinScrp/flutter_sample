@@ -9,7 +9,7 @@ class BaseEvent {
   }
 }
 
-class PostLikeEvent extends BaseEvent with ChangeNotifier{
+class PostLikeEvent extends BaseEvent {
   int id;
   bool isLike;
 

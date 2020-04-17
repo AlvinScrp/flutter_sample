@@ -15,7 +15,7 @@ class PostDetailModel with ChangeNotifier {
 
   likePost(bool toLike) {
     PostServer.instance().like(post.id, toLike).then((result) {
-      if (result) {
+      if (result["success"]) {
         post.isLike = toLike;
         PostLikeEvent(post.id, toLike).fire();
       }

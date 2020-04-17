@@ -15,10 +15,12 @@
 - [Flutter状态管理Provider(二) 源码分析](https://juejin.im/post/5e89ad7a6fb9a03c4e64697d)
 入口：main_provider.dart
 
+- [Flutter状态管理Provider(三)基于Provider的代码框架](https://juejin.im/post/5e931f41e51d4547153d174e)
+入口：main_provider.dart
+
 ## 待补充:
 - 自定义圆角widget   y
 - Eventbus 全局事件总线使用  y
-- 基于Provider实现的开发框架  m  编辑中
 - Selector研究与自定义ItemRefresher  m
 - 图片swiper组件  y
 - 模糊使用   y

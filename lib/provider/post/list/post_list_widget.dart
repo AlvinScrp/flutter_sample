@@ -21,6 +21,8 @@ class _PostListWidgetState extends State<PostListWidget> {
   @override
   void initState() {
     super.initState();
+
+    ///初始化加载数据
     _listModel = PostListModel()..loadData();
   }
 
@@ -30,6 +32,8 @@ class _PostListWidgetState extends State<PostListWidget> {
       appBar: AppBar(
         title: Text("帖子列表"),
       ),
+
+      ///多Provider使用，提前设置好
       body: MultiProvider(
         providers: [
           ChangeNotifierProvider.value(value: _listModel),
@@ -54,6 +58,9 @@ class _PostListWidgetState extends State<PostListWidget> {
                   },
                   itemCount: model.posts.length);
             }
+
+            ///设置 SmartRefresher： refreshController，onRefresh。
+            ///onRefresh回调。widget不处理数据相关的回调，而是交给model处理
             return SmartRefresher(
               controller: model.refreshController,
               enablePullDown: true,
@@ -68,6 +75,7 @@ class _PostListWidgetState extends State<PostListWidget> {
   }
 
   Widget _buildListItem(BuildContext context, PostBean post) {
+    ///ItemRefresher 自定义的列表item刷新利器
     return ItemRefresher<PostListItemListenable, PostBean>(
       value: post,
       shouldRebuild: (itemListenable, value) =>

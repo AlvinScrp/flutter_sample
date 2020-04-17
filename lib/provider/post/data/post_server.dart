@@ -90,14 +90,14 @@ class PostServer {
         ?.toMap();
   }
 
-  Future<bool> like(int id, bool toLike) async {
+  Future<Map<String, dynamic>> like(int id, bool toLike) async {
     await Future.delayed(Duration(milliseconds: 300));
     PostBean post =
         posts.firstWhere((post) => post.id == id, orElse: () => null);
     if (post != null) {
       post.isLike = toLike;
-      return true;
+      return {"success": true};
     }
-    return false;
+    return {"success": false};
   }
 }
