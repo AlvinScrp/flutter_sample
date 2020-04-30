@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
-typedef ShouldRebuild<A, T> = bool Function(A notifier, T value);
+typedef ShouldRebuild<A, T> = bool Function(A change, T value);
 
 class ItemRefresher<A, T> extends SingleChildStatefulWidget {
   final ShouldRebuild<A, T> _shouldRebuild;

@@ -20,7 +20,7 @@
 
 ## 待补充:
 - 自定义圆角widget   y
-- Eventbus 全局事件总线使用  y
+- Eventbus 全局事件总线使用  m
 - Selector研究与自定义ItemRefresher  m
 - 图片swiper组件  y
 - 模糊使用   y
@@ -28,5 +28,6 @@
 - 自定义Route:SlidePageRoute,TransparentModalRoute... y
 - 横竖屏切换问题  m
 - 1.12.13 新的build aar m
+- 固定尺寸GirdItem SliverGridDelegateWithFixedSize m
 
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sample/provider/post/base/item_refresher.dart';
+import 'package:flutter_sample/provider/post/base/slide_page_route.dart';
 import 'package:flutter_sample/provider/post/data/post_bean.dart';
 import 'package:flutter_sample/provider/post/detail/post_detail_widget.dart';
 import 'package:flutter_sample/provider/post/list/post_item_notifier.dart';
@@ -15,8 +16,12 @@ class PostListWidget extends StatefulWidget {
   _PostListWidgetState createState() => _PostListWidgetState();
 }
 
-class _PostListWidgetState extends State<PostListWidget> {
+class _PostListWidgetState extends State<PostListWidget>
+    with AutomaticKeepAliveClientMixin {
   PostListModel _listModel;
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -24,10 +29,13 @@ class _PostListWidgetState extends State<PostListWidget> {
 
     ///初始化加载数据
     _listModel = PostListModel()..loadData();
+    print("PostListWidget:initState");
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+    print("PostListWidget:build");
     return Scaffold(
       appBar: AppBar(
         title: Text("帖子列表"),
@@ -37,7 +45,7 @@ class _PostListWidgetState extends State<PostListWidget> {
       body: MultiProvider(
         providers: [
           ChangeNotifierProvider.value(value: _listModel),
-          ChangeNotifierProvider.value(value: _listModel.itemListenable),
+          ChangeNotifierProvider.value(value: _listModel.itemChange),
         ],
         child: Consumer<PostListModel>(
           builder: (context, model, child) {
@@ -75,8 +83,8 @@ class _PostListWidgetState extends State<PostListWidget> {
   }
 
   Widget _buildListItem(BuildContext context, PostBean post) {
-    ///ItemRefresher 自定义的列表item刷新利器
-    return ItemRefresher<PostListItemListenable, PostBean>(
+    ///ItemRefresher 自定义的列表item刷新
+    return ItemRefresher<PostItemChange, PostBean>(
       value: post,
       shouldRebuild: (itemListenable, value) =>
           (itemListenable.id != null && itemListenable.id == value.id),
@@ -90,8 +98,8 @@ class _PostListWidgetState extends State<PostListWidget> {
   }
 
   _skipPostDetail(BuildContext context, PostBean post) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => PostDetailWidget(id: post.id),
+    Navigator.of(context).push(SlidePageRoute(
+      widget: PostDetailWidget(id: post.id),
     ));
   }
 }

@@ -17,10 +17,11 @@ class PostListModel with ChangeNotifier {
   VoidCallback _eventDispose;
 
   /// 单个刷新的ChangeNotifier
-  PostListItemListenable itemListenable;
+  PostItemChange itemChange;
 
   PostListModel() {
-    itemListenable = new PostListItemListenable();
+    itemChange = new PostItemChange();
+    subscribePostLike();
   }
 
   ///订阅PostLikeEvent
@@ -28,9 +29,11 @@ class PostListModel with ChangeNotifier {
     StreamSubscription subscription =
         eventBus.on<PostLikeEvent>().listen((event) {
       ///拿到event，更新下当前页面对应post的isLike状态
-      posts
-          ?.firstWhere((post) => post.id == event.id, orElse: () => null)
-          ?.isLike = event.isLike;
+      var post =
+          posts?.firstWhere((post) => post.id == event.id, orElse: () => null);
+      post?.isLike = event.isLike;
+      itemChange.id = event.id;
+      itemChange.notifyListeners();
     });
     _eventDispose = () => subscription.cancel();
   }

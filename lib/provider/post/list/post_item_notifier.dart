@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_sample/provider/post/data/post_bean.dart';
 
-class PostListItemListenable with ChangeNotifier {
+class PostItemChange with ChangeNotifier {
   int id;
 }
