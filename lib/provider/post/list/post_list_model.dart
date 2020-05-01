@@ -17,10 +17,10 @@ class PostListModel with ChangeNotifier {
   VoidCallback _eventDispose;
 
   /// 单个刷新的ChangeNotifier
-  PostItemChange itemChange;
+  PostNotifier itemChange;
 
   PostListModel() {
-    itemChange = new PostItemChange();
+    itemChange = new PostNotifier();
     subscribePostLike();
   }
 

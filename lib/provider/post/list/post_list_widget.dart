@@ -5,6 +5,7 @@ import 'package:flutter_sample/provider/post/data/post_bean.dart';
 import 'package:flutter_sample/provider/post/detail/post_detail_widget.dart';
 import 'package:flutter_sample/provider/post/list/post_item_notifier.dart';
 import 'package:flutter_sample/provider/post/list/post_item_widget.dart';
+import 'package:flutter_sample/provider/post/list/post_item_widget2.dart';
 import 'package:flutter_sample/provider/post/list/post_list_model.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -84,10 +85,10 @@ class _PostListWidgetState extends State<PostListWidget>
 
   Widget _buildListItem(BuildContext context, PostBean post) {
     ///ItemRefresher 自定义的列表item刷新
-    return ItemRefresher<PostItemChange, PostBean>(
+    return ItemRefresher<PostNotifier, PostBean>(
       value: post,
-      shouldRebuild: (itemListenable, value) =>
-          (itemListenable.id != null && itemListenable.id == value.id),
+      shouldRebuild: (notifier, value) =>
+          (notifier.id != null && notifier.id == value.id),
       builder: (context, value, child) {
         return PostItemWidget(
           post: value,
@@ -95,6 +96,7 @@ class _PostListWidgetState extends State<PostListWidget>
         );
       },
     );
+//    return PostItemWidget2(post: post, click: _skipPostDetail);
   }
 
   _skipPostDetail(BuildContext context, PostBean post) {

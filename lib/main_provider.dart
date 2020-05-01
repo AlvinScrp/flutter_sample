@@ -3,6 +3,7 @@ import 'package:flutter_sample/provider/provider_demo_widget1.dart';
 import 'package:flutter_sample/provider/provider_demo_widget2.dart';
 import 'package:flutter_sample/provider/provider_demo_widget3.dart';
 import 'package:flutter_sample/provider/provider_demo_widget4.dart';
+import 'package:flutter_sample/provider/selector/selector_demo_widget.dart';
 import 'package:flutter_sample/provider/set_state_demo_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -39,7 +40,8 @@ class _MainProviderWidgetState extends State<MainProviderWidget> {
           _build(context, providerDemoTitle2, ProviderDemoWidget2()),
           _build(context, providerDemoTitle3, ProviderDemoWidget3()),
           _build(context, providerDemoTitle4, ProviderDemoWidget4()),
-          _build(context, "代码框架", PostListWidget()),
+          _build(context, "代码应用(简易社区)", PostListWidget()),
+          _build(context, "Selector使用", SelectorDemoWidget()),
         ],
       ),
     );
