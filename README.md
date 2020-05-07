@@ -21,7 +21,8 @@
 - [Flutter状态管理Provider(四) Selector使用](https://juejin.im/post/5eabb46be51d454dbd1fd30a)
 入口：main_provider.dart
 
-
+- [Flutter事件总线EventBus](https://juejin.im/post/5eb3973ae51d4525602d34ac)
+入口：main_eventbus.dart
 
 ## 待补充:
 - 自定义圆角widget   y
@@ -34,5 +35,7 @@
 - 1.12.13 新的build aar m
 - 固定尺寸GirdItem SliverGridDelegateWithFixedSize m
 - Widget与Element关系 m
+- fish-redux 源码解析 m
+- stream 源码解析 m
 
 
