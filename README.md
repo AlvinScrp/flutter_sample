@@ -26,7 +26,6 @@
 
 ## 待补充:
 - 自定义圆角widget   y
-- Eventbus 全局事件总线使用  m
 - 图片swiper组件  y
 - 模糊使用   y
 - OverScrollBehavior  y
@@ -37,5 +36,6 @@
 - Widget与Element关系 m
 - fish-redux 源码解析 m
 - stream 源码解析 m
+- 混合栈 flutter_thrio flutter_boost
 
 
