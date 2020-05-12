@@ -24,6 +24,10 @@
 - [Flutter事件总线EventBus](https://juejin.im/post/5eb3973ae51d4525602d34ac)
 入口：main_eventbus.dart
 
+- [Flutter之Stream(一)介绍](https://juejin.im/post/5eba0e9051882558dc24cadc)
+入口：main_Stream.dart
+
+
 ## 待补充:
 - 自定义圆角widget   y
 - 图片swiper组件  y
