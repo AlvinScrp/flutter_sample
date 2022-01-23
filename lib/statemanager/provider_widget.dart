@@ -16,13 +16,15 @@ void main() => runApp(MaterialApp(
     ));
 
 class InheritedWidgetTestRoute extends StatefulWidget {
+  const InheritedWidgetTestRoute({Key? key}) : super(key: key);
+
   @override
   _InheritedWidgetTestRouteState createState() =>
-      new _InheritedWidgetTestRouteState();
+       _InheritedWidgetTestRouteState();
 }
 
 class _InheritedWidgetTestRouteState extends State<InheritedWidgetTestRoute> {
-  ShareModelWithNotifier _shareDataWithNotifier = new ShareModelWithNotifier(0);
+  ShareModelWithNotifier _shareDataWithNotifier =  ShareModelWithNotifier(0);
 
   @override
   Widget build(BuildContext context) {
@@ -38,16 +40,16 @@ class _InheritedWidgetTestRouteState extends State<InheritedWidgetTestRoute> {
                 print("__TestWidgetState build context:$context2");
                 return Text(
                   model.count.toString(),
-                  style: TextStyle(fontSize: 40),
+                  style:const TextStyle(fontSize: 40),
                 );
               },
             ),
             Builder(
               builder: (context2) {
                 print("__TestButtonState build context:$context2}");
-                return RaisedButton(
+                return ElevatedButton(
                     child: Text(
-                        "Increment (current:${Provider.of<ShareModelWithNotifier>(context2, listen: true)?.count.toString()})"),
+                        "Increment (current:${Provider.of<ShareModelWithNotifier>(context2, listen: true).count.toString()})"),
 //                    "Increment (current)"),
                     onPressed: () {
                       Provider.of<ShareModelWithNotifier>(context2,

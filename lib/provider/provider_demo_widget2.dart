@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-final String providerDemoTitle2 = "Provider示例2";
-final String providerDemoIntroduction2 = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+const String providerDemoTitle2 = "Provider示例2";
+const String providerDemoIntroduction2 = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
     "* 完善InheritedWidget功能\n"
     "* Provider继承InheritedWidget,强化其访问功能\n"
     "* CountModel封装示例1中的count，继承ChangeNotifier，具备notify能力\n"
@@ -10,7 +10,7 @@ final String providerDemoIntroduction2 = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
     "外部控件不需要再关心状态管理的细节了\n";
 
 class ProviderDemoWidget2 extends StatefulWidget {
-  ProviderDemoWidget2({Key key}) : super(key: key);
+  ProviderDemoWidget2({Key? key}) : super(key: key);
 
   @override
   _ProviderDemoWidget2State createState() => _ProviderDemoWidget2State();
@@ -42,10 +42,10 @@ class _ProviderDemoWidget2State extends State<ProviderDemoWidget2> {
                 return Text(
                     "计数:${CountProvider.of(context2, false).count}（无依赖情况)");
               }),
-              RaisedButton(
-                  child: Text("increment"),
+              ElevatedButton(
+                  child: const Text("increment"),
                   onPressed: () => _countModel.increment()),
-              Text(providerDemoIntroduction2),
+              const Text(providerDemoIntroduction2),
             ],
           ),
         ),
@@ -59,7 +59,7 @@ class ChangeNotifierProvider extends StatefulWidget {
 
   final CountModel model;
 
-  ChangeNotifierProvider({this.child, this.model});
+  ChangeNotifierProvider({Key? key, required this.child, required this.model}) : super(key: key);
 
   @override
   _ChangeNotifierProviderState createState() => _ChangeNotifierProviderState();
@@ -96,16 +96,18 @@ class _ChangeNotifierProviderState extends State<ChangeNotifierProvider> {
 class CountProvider extends InheritedWidget {
   final CountModel model;
 
-  CountProvider({Key key, this.model, Widget child})
+  CountProvider({Key? key, required this.model, required Widget child})
       : super(key: key, child: child);
 
   static CountModel of(BuildContext context, bool depend) {
     if (depend) {
-      return context.dependOnInheritedWidgetOfExactType<CountProvider>().model;
+      return (context.dependOnInheritedWidgetOfExactType(aspect: CountProvider)
+              as CountProvider)
+          .model;
     } else {
-      CountProvider provider = context
+      CountProvider provider = (context
           .getElementForInheritedWidgetOfExactType<CountProvider>()
-          .widget;
+          ?.widget) as CountProvider;
       return provider.model;
     }
   }

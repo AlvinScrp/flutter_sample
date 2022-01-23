@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class InputWidget extends StatefulWidget {
-  InputWidget({Key key}) : super(key: key);
+  InputWidget({Key? key}) : super(key: key);
 
   @override
   _InputWidgetState createState() => _InputWidgetState();
@@ -37,20 +37,19 @@ class _InputWidgetState extends State<InputWidget> {
                     ),
                     Expanded(
                       child: Container(
-                        margin: EdgeInsets.only(top: 10, bottom: 10),
-                        decoration: BoxDecoration(
+                        margin: const EdgeInsets.only(top: 10, bottom: 10),
+                        decoration:const BoxDecoration(
                             color: Color(0xfff6f8fb),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))),
                         alignment: Alignment.center,
                         child: TextField(
                           autofocus: true,
-                          maxLengthEnforced: true,
                           inputFormatters: <TextInputFormatter>[
                             LengthLimitingTextInputFormatter(200)
                           ],
                           controller: editingController,
-                          decoration: InputDecoration(
+                          decoration:const InputDecoration(
                               isDense: true,
                               contentPadding: EdgeInsets.only(
                                   left: 10, right: 10, top: 5, bottom: 5),
@@ -62,16 +61,16 @@ class _InputWidgetState extends State<InputWidget> {
                     ),
                     GestureDetector(
                       onTap: (() {
-                        var text = editingController.text?.trim() ?? "";
+                        var text = editingController.text.trim();
                         if (text.isNotEmpty) {
                           Navigator.pop(context, text);
                         }
                       }),
                       child: Container(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                             left: 10, right: 10, top: 10, bottom: 10),
                         alignment: Alignment.center,
-                        child: Text(
+                        child:const Text(
                           "发送",
                           style: TextStyle(color: Color(0xff00BBBB)),
                         ),

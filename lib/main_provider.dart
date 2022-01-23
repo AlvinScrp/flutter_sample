@@ -5,7 +5,6 @@ import 'package:flutter_sample/provider/provider_demo_widget3.dart';
 import 'package:flutter_sample/provider/provider_demo_widget4.dart';
 import 'package:flutter_sample/provider/selector/selector_demo_widget.dart';
 import 'package:flutter_sample/provider/set_state_demo_widget.dart';
-import 'package:provider/provider.dart';
 
 import 'provider/post/list/post_list_widget.dart';
 
@@ -17,7 +16,7 @@ import 'provider/post/list/post_list_widget.dart';
 void main() => runApp(MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Provider"),
+          title: const Text("Provider"),
         ),
         body: MainProviderWidget(),
       ),
@@ -36,7 +35,7 @@ class _MainProviderWidgetState extends State<MainProviderWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           _build(context, setStateDemoTitle, SetStateDemoWidget()),
-          _build(context, providerDemoTitle1, ProviderDemoWidget1()),
+          _build(context, providerDemoTitle1, const ProviderDemoWidget1()),
           _build(context, providerDemoTitle2, ProviderDemoWidget2()),
           _build(context, providerDemoTitle3, ProviderDemoWidget3()),
           _build(context, providerDemoTitle4, ProviderDemoWidget4()),
@@ -48,7 +47,7 @@ class _MainProviderWidgetState extends State<MainProviderWidget> {
   }
 
   Widget _build(BuildContext context, String text, Widget newRouteWidget) {
-    return RaisedButton(
+    return ElevatedButton(
       child: Text(text),
       onPressed: () => Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => newRouteWidget,

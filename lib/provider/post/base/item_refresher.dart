@@ -9,13 +9,13 @@ class ItemRefresher<A, T> extends SingleChildStatefulWidget {
   final T value;
 
   ItemRefresher({
-    Key key,
-    @required this.value,
-    ShouldRebuild<A, T> shouldRebuild,
-    @required this.builder,
-    Widget child,
+    Key? key,
+    required this.value,
+    required ShouldRebuild<A, T> shouldRebuild,
+    required this.builder,
+    Widget? child,
   })  : assert(builder != null),
-        this._shouldRebuild = shouldRebuild,
+        _shouldRebuild = shouldRebuild,
         super(key: key, child: child);
 
   final ValueWidgetBuilder<T> builder;
@@ -25,11 +25,11 @@ class ItemRefresher<A, T> extends SingleChildStatefulWidget {
 }
 
 class _ItemRefresherState<A, T> extends SingleChildState<ItemRefresher<A, T>> {
-  Widget cache;
-  Widget oldWidget;
+  Widget? cache;
+  Widget? oldWidget;
 
   @override
-  Widget buildWithChild(BuildContext context, Widget child) {
+  Widget buildWithChild(BuildContext context, Widget? child) {
     A notifier = Provider.of(context);
     var shouldInvalidateCache = oldWidget != widget ||
         (widget._shouldRebuild != null &&
@@ -43,6 +43,6 @@ class _ItemRefresherState<A, T> extends SingleChildState<ItemRefresher<A, T>> {
         child,
       );
     }
-    return cache;
+    return cache!;
   }
 }

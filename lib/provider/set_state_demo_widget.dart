@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-final String setStateDemoTitle = "setState示例";
+const String setStateDemoTitle = "setState示例";
 
 class SetStateDemoWidget extends StatefulWidget {
-  SetStateDemoWidget({Key key}) : super(key: key);
+  SetStateDemoWidget({Key? key}) : super(key: key);
 
   @override
   _SetStateDemoWidgetState createState() => _SetStateDemoWidgetState();
@@ -23,7 +23,7 @@ class _SetStateDemoWidgetState extends State<SetStateDemoWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text("计数:$count"),
-            RaisedButton(
+            ElevatedButton(
               child: Text("increment"),
               onPressed: () => setState(() => count++),
             )

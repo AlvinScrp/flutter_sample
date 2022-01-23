@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 
+import 'provider/post/list/post_list_widget.dart';
+import 'provider/provider_demo_widget1.dart';
+import 'provider/provider_demo_widget2.dart';
+import 'provider/provider_demo_widget3.dart';
+import 'provider/provider_demo_widget4.dart';
+import 'provider/selector/selector_demo_widget.dart';
+import 'provider/set_state_demo_widget.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -14,7 +22,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
@@ -25,31 +33,27 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-          child: Container(
-//              child: Column(
-//        crossAxisAlignment: CrossAxisAlignment.stretch,
-//        children: <Widget>[
-//          new Text(
-//            "在原生Android",
-//            style: new TextStyle(
-//              color: Color(0xFFFF0000),
-//            ),
-//          ),
-//          new Text(
-//            "文本的显示格式与式样对于网页设计师来说是一个重要问题。这一课将向你介绍CSS在文本布局方面令人激动的特性",
-//            style: new TextStyle(
-//              color: Color(0xFF000000),
-//            ),
-//          ),
-//        ],
-//      )
-        child: Text.rich(TextSpan(text: "Q：", children: <TextSpan>[
-          TextSpan(text: "文本的显示格式与式样对于网页设计师来说是一个重要问题。这一课将向你介绍CSS在文本布局方面令人激动的特性")
-        ])),
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+        body: Column(
+          children: [
+            _build(context, setStateDemoTitle, SetStateDemoWidget()),
+            _build(context, providerDemoTitle1, const ProviderDemoWidget1()),
+            _build(context, providerDemoTitle2, ProviderDemoWidget2()),
+            _build(context, providerDemoTitle3, ProviderDemoWidget3()),
+            _build(context, providerDemoTitle4, ProviderDemoWidget4()),
+            _build(context, "代码应用(简易社区)", PostListWidget()),
+            _build(context, "Selector使用", SelectorDemoWidget()),
+          ],
+        ));
+  }
+
+  Widget _build(BuildContext context, String text, Widget newRouteWidget) {
+    return ElevatedButton(
+      child: Text(text),
+      onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => newRouteWidget,
       )),
     );
   }

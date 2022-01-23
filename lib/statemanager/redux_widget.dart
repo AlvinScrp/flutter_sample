@@ -46,7 +46,7 @@ class _ReduxWidgetPageState extends State<ReduxWidgetPage> {
                   (step) => store.dispatch(IncrementCountAction(step)),
               builder: (context2, calback) {
                 print("__TestWidgetState build context:$context2");
-                return RaisedButton(
+                return ElevatedButton(
                     child: Text(
                         "Increment (current:${ StoreProvider.of<ShareData>(context2,listen: true).state.count})"),
 //                    "Increment (current)"),
@@ -63,7 +63,7 @@ class _ReduxWidgetPageState extends State<ReduxWidgetPage> {
 }
 
 class ShareData {
-  int count;
+  int count = 0;
 
   ShareData(this.count);
 

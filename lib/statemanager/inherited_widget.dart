@@ -40,7 +40,7 @@ class _InheritedWidgetTestRouteState extends State<InheritedWidgetTestRoute> {
             },),
             Builder(builder: (context){
               print("__TestButtonState build context:$context}");
-              return RaisedButton(
+              return ElevatedButton(
                 child: Text(
                     "Increment (current:${ShareModelWidget.of(context).model.count.toString()})"),
                 onPressed: () => ShareModelWidget.of(context).model.increment(),
@@ -48,7 +48,7 @@ class _InheritedWidgetTestRouteState extends State<InheritedWidgetTestRoute> {
             },),
 //            _TestText(),
 //            _TestButton(),
-            RaisedButton(
+            ElevatedButton(
               child: Text("刷新页面"),
               onPressed: () => setState(() {}),
             ),
@@ -68,21 +68,21 @@ class _TestRefresh extends StatefulWidget {
 class __TestRefreshState extends State<_TestRefresh> {
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      child: Text("刷新页面"),
+    return ElevatedButton(
+      child: const Text("刷新页面"),
       onPressed: () => setState(() {}),
     );
   }
 }
 
 class ShareModelWidget extends InheritedWidget {
-  ShareModelWidget({@required this.model, Widget child}) : super(child: child);
+  ShareModelWidget({required this.model,required Widget child}) : super(child: child);
 
   final ShareModel model; //需要在子树中共享的数据，保存点击次数
 
   //定义一个便捷方法，方便子树中的widget获取共享数据
   static ShareModelWidget of(BuildContext context) {
-    return context.inheritFromWidgetOfExactType(ShareModelWidget);
+    return context.dependOnInheritedWidgetOfExactType(aspect:ShareModelWidget)!;
 //  return context.ancestorInheritedElementForWidgetOfExactType(ShareDataWidget).widget;
   }
 

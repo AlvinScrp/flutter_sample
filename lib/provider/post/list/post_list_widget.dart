@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class PostListWidget extends StatefulWidget {
-  PostListWidget({Key key}) : super(key: key);
+  PostListWidget({Key? key}) : super(key: key);
 
   @override
   _PostListWidgetState createState() => _PostListWidgetState();
@@ -19,7 +19,7 @@ class PostListWidget extends StatefulWidget {
 
 class _PostListWidgetState extends State<PostListWidget>
     with AutomaticKeepAliveClientMixin {
-  PostListModel _listModel;
+  late PostListModel _listModel;
 
   @override
   bool get wantKeepAlive => true;
@@ -51,7 +51,7 @@ class _PostListWidgetState extends State<PostListWidget>
         child: Consumer<PostListModel>(
           builder: (context, model, child) {
             Widget child;
-            if (model.posts?.isEmpty ?? true) {
+            if (model.posts.isEmpty) {
               child = Container();
             } else {
               child = ListView.separated(
@@ -99,9 +99,9 @@ class _PostListWidgetState extends State<PostListWidget>
 //    return PostItemWidget2(post: post, click: _skipPostDetail);
   }
 
-  _skipPostDetail(BuildContext context, PostBean post) {
+  _skipPostDetail(BuildContext context, PostBean? post) {
     Navigator.of(context).push(SlidePageRoute(
-      widget: PostDetailWidget(id: post.id),
+      widget: PostDetailWidget(id: post?.id??-1),
     ));
   }
 }

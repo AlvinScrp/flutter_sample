@@ -1,8 +1,9 @@
 import 'package:flutter_sample/provider/post/data/post_bean.dart';
+import 'package:collection/collection.dart';
 
 class PostServer {
-  var posts = new List<PostBean>();
-  static PostServer _instance;
+  var posts = List<PostBean>.empty();
+  static late PostServer _instance;
 
   static PostServer instance() {
     if (_instance == null) {
@@ -12,7 +13,7 @@ class PostServer {
   }
 
   PostServer._() {
-    posts = new List<PostBean>();
+    posts = List<PostBean>.empty();
     posts.add(PostBean.value(
       0,
       true,
@@ -86,14 +87,16 @@ class PostServer {
   Future<Map<String, dynamic>> getPostDetail(int id) async {
     await Future.delayed(Duration(milliseconds: 300));
     return posts
-        .firstWhere((post) => post.id == id, orElse: () => null)
-        ?.toMap();
+            .firstWhereOrNull(
+              (post) => post.id == id,
+            )
+            ?.toMap() ??
+        Map();
   }
 
   Future<Map<String, dynamic>> like(int id, bool toLike) async {
     await Future.delayed(Duration(milliseconds: 300));
-    PostBean post =
-        posts.firstWhere((post) => post.id == id, orElse: () => null);
+    PostBean? post = posts.firstWhereOrNull((post) => post.id == id);
     if (post != null) {
       post.isLike = toLike;
       return {"success": true};

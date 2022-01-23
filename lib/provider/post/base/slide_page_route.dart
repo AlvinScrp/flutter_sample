@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 class SlidePageRoute extends PageRouteBuilder {
   final Widget widget;
 
-  SlidePageRoute({this.widget})
+  SlidePageRoute({required this.widget})
       : super(
             transitionDuration: const Duration(milliseconds: 300), //设置动画时长500毫秒
             pageBuilder: (BuildContext context, Animation<double> animation1,

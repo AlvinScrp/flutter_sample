@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-final String providerDemoTitle3 = "Provider示例3";
-final String providerDemoIntroduction3 = "上一个示例的通用泛型实现\n"
+const String providerDemoTitle3 = "Provider示例3";
+const String providerDemoIntroduction3 = "上一个示例的通用泛型实现\n"
     "CountModel作为泛型实例，传递给ChangeNotifierProvider和Provider\n"
     "同时ChangeNotifierProvider和Provider也可以拿到别地用了";
 
 class ProviderDemoWidget3 extends StatefulWidget {
-  ProviderDemoWidget3({Key key}) : super(key: key);
+  ProviderDemoWidget3({Key? key}) : super(key: key);
 
   @override
   _ProviderDemoWidget3State createState() => _ProviderDemoWidget3State();
@@ -35,7 +35,7 @@ class _ProviderDemoWidget3State extends State<ProviderDemoWidget3> {
                 return Text(
                     "计数:${Provider.of<CountModel>(context2, false).count}（无依赖情况)");
               }),
-              RaisedButton(
+              ElevatedButton(
                   child: Text("increment"),
                   onPressed: () => _countModel.increment()),
               Text(providerDemoIntroduction3),
@@ -52,7 +52,7 @@ class ChangeNotifierProvider<T extends ChangeNotifier> extends StatefulWidget {
 
   final T model;
 
-  ChangeNotifierProvider({this.child, this.model});
+  ChangeNotifierProvider({required this.child,required this.model});
 
   @override
   _ChangeNotifierProviderState createState() => _ChangeNotifierProviderState();
@@ -89,14 +89,16 @@ class _ChangeNotifierProviderState extends State<ChangeNotifierProvider> {
 class Provider<T extends ChangeNotifier> extends InheritedWidget {
   final T model;
 
-  Provider({Key key, this.model, Widget child}) : super(key: key, child: child);
+  Provider({Key? key,required this.model,required Widget child}) : super(key: key, child: child);
 
   static T of<T extends ChangeNotifier>(BuildContext context, bool depend) {
-    if (depend) {
-      return context.dependOnInheritedWidgetOfExactType<Provider>().model;
+     if (depend) {
+      return (context.dependOnInheritedWidgetOfExactType(aspect: Provider<T>)
+              as Provider<T>).model;
     } else {
-      Provider provider =
-          context.getElementForInheritedWidgetOfExactType<Provider>().widget;
+      Provider<T> provider = (context
+          .getElementForInheritedWidgetOfExactType<Provider<T>>()
+          ?.widget) as Provider<T>;
       return provider.model;
     }
   }

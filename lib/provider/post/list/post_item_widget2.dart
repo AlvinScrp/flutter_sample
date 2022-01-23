@@ -4,11 +4,11 @@ import 'package:flutter_sample/provider/post/list/post_item_notifier.dart';
 import 'package:provider/provider.dart';
 
 class PostItemWidget2 extends StatelessWidget {
-  final PostBean post;
+  final PostBean? post;
 
-  final void Function(BuildContext context, PostBean post) click;
+  final void Function(BuildContext context, PostBean? post)? click;
 
-  const PostItemWidget2({Key key, this.post, this.click}) : super(key: key);
+  const PostItemWidget2({Key? key, this.post, this.click}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +29,12 @@ class PostItemWidget2 extends StatelessWidget {
               Container(
                 width: 50,
                 child: Selector<PostNotifier, bool>(
-                    selector: (context, itemChange) => post.isLike,
+                    selector: (context, itemChange) => post?.isLike ?? false,
                     shouldRebuild: (pre, next) => pre != next,
                     builder: (context, isLike, child) {
                       return Icon(
                         Icons.favorite,
-                        color: (isLike ?? false) ? Colors.red : Colors.grey,
+                        color: (isLike) ? Colors.red : Colors.grey,
                       );
                     }),
               ),

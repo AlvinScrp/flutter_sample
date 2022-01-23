@@ -4,7 +4,7 @@ import 'package:flutter_sample/provider/post/data/post_bean.dart';
 import 'package:flutter_sample/provider/post/data/post_server.dart';
 
 class PostDetailModel with ChangeNotifier {
-  PostBean post;
+ late PostBean post;
 
   initPost(int id) {
     PostServer.instance().getPostDetail(id).then((json) {
