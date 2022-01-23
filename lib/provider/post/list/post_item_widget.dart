@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sample/provider/post/data/post_bean.dart';
 
 class PostItemWidget extends StatelessWidget {
-  final PostBean post;
+  final PostBean? post;
 
-  final void Function(BuildContext context, PostBean post) click;
+  final void Function(BuildContext context, PostBean? post)? click;
 
-  const PostItemWidget({Key key, this.post, this.click}) : super(key: key);
+  const PostItemWidget({Key? key,  this.post, this.click}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

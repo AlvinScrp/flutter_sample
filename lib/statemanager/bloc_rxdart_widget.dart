@@ -1,9 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
-import 'package:provider/provider.dart';
-import 'package:redux/redux.dart';
 import 'package:rxdart/rxdart.dart';
 
 ///
@@ -42,7 +39,7 @@ class _BLocRxDartWidgetState extends State<BLocRxDartWidget> {
                     "${snapshot.data}",
                     style: TextStyle(fontSize: 40),
                   ),
-                  RaisedButton(
+                  ElevatedButton(
                       child: Text("Increment (current:${snapshot.data})"),
                       onPressed: () {
                         ShareProvider.of(context2).increment();
@@ -54,15 +51,13 @@ class _BLocRxDartWidgetState extends State<BLocRxDartWidget> {
 }
 
 class ShareBLoC {
-
-  int _count=0;
+  int _count = 0;
 
   final BehaviorSubject<int> _countSubject = BehaviorSubject<int>();
 
-  Stream<int>  get _countStream   => _countSubject.stream;
+  Stream<int> get _countStream => _countSubject.stream;
 
-  ShareBLoC() ;
-
+  ShareBLoC();
 
   void dispose() {
     _countSubject.close();
@@ -77,9 +72,9 @@ class ShareProvider extends InheritedWidget {
   final ShareBLoC shareBloc;
 
   ShareProvider({
-    Key key,
-    ShareBLoC shareBloc,
-    Widget child,
+    Key? key,
+    ShareBLoC? shareBloc,
+    required Widget child,
   })  : shareBloc = shareBloc ?? ShareBLoC(),
         super(key: key, child: child);
 
@@ -87,6 +82,7 @@ class ShareProvider extends InheritedWidget {
   bool updateShouldNotify(InheritedWidget oldWidget) => true;
 
   static ShareBLoC of(BuildContext context) =>
-      (context.inheritFromWidgetOfExactType(ShareProvider) as ShareProvider)
+      (context.dependOnInheritedWidgetOfExactType(aspect: ShareProvider)
+              as ShareProvider)
           .shareBloc;
 }

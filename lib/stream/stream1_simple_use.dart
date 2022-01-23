@@ -1,7 +1,7 @@
 //周期性发送整数Stream，当使用yield时，向Stream提交事件(一个整数)
 import 'dart:async';
 
-Stream<int> timedCounter(Duration interval, [int maxCount]) async* {
+Stream<int> timedCounter(Duration interval, [int maxCount = 0]) async* {
   int i = 0;
   while (true) {
     await Future.delayed(interval);
@@ -21,7 +21,7 @@ void _onData(int event) => print("$event");
 
 void _onDone() => print("onDone");
 
-void _delayCancel(StreamSubscription<int> subscription, {int milliseconds}) {
+void _delayCancel(StreamSubscription<int> subscription, {int milliseconds = 0}) {
   Future.delayed(Duration(milliseconds: milliseconds))
       .then((value) => subscription.cancel());
 }

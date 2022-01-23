@@ -43,7 +43,7 @@ class _InputHomeWidgetState extends State<InputHomeWidget> {
   void _input() {
     InputDialog.show(context).then((value) {
       setState(() {
-        _inputString = value;
+        _inputString = value??"";
       });
     });
   }

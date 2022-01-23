@@ -4,19 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SelectorDemoWidget extends StatefulWidget {
-  SelectorDemoWidget({Key key}) : super(key: key);
+  SelectorDemoWidget({Key? key}) : super(key: key);
 
   @override
   _SelectorDemoWidgetState createState() => _SelectorDemoWidgetState();
 }
 
 class _SelectorDemoWidgetState extends State<SelectorDemoWidget> {
-  CountModel _model;
+  CountModel _model = CountModel()..initData();
 
   @override
   void initState() {
     super.initState();
-    _model = new CountModel()..initData();
+    _model = CountModel()..initData();
   }
 
   @override
@@ -38,7 +38,7 @@ class _SelectorDemoWidgetState extends State<SelectorDemoWidget> {
 class CountItemWidget extends StatelessWidget {
   final String content;
 
-  CountItemWidget({this.content});
+  CountItemWidget({required this.content});
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +47,11 @@ class CountItemWidget extends StatelessWidget {
       height: 80,
       padding: EdgeInsets.all(15),
       alignment: Alignment.center,
-      child: RaisedButton(
+      child: ElevatedButton(
         onPressed: () =>
             Provider.of<CountModel>(context, listen: false).increment(content),
         child: Selector<CountModel, int>(
-            selector: (context, model) => model.contentMap[content],
+            selector: (context, model) => model.contentMap[content]!,
             shouldRebuild: (preCount, nextCount) => preCount != nextCount,
             builder: (context, count, child) {
               print("$content Selector:builder");
@@ -73,7 +73,7 @@ class CountModel extends ChangeNotifier {
 
   increment(String content) {
     if (contentMap.containsKey(content)) {
-      contentMap[content] = contentMap[content] + 1;
+      contentMap[content] = contentMap[content]! + 1;
       notifyListeners();
     }
   }

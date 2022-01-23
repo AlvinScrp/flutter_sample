@@ -6,18 +6,19 @@ import 'package:flutter_sample/provider/post/data/post_bean.dart';
 import 'package:flutter_sample/provider/post/data/post_server.dart';
 import 'package:flutter_sample/provider/post/list/post_item_notifier.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:collection/collection.dart';
 
 class PostListModel with ChangeNotifier {
-  var posts = new List<PostBean>();
+  var posts = List<PostBean>.empty();
 
   ///smartRefresher的刷新控制器
   RefreshController refreshController = RefreshController();
 
   ///解除事件监听方法
-  VoidCallback _eventDispose;
+  late VoidCallback _eventDispose;
 
   /// 单个刷新的ChangeNotifier
-  PostNotifier itemChange;
+  late PostNotifier itemChange;
 
   PostListModel() {
     itemChange = new PostNotifier();
@@ -29,8 +30,7 @@ class PostListModel with ChangeNotifier {
     StreamSubscription subscription =
         eventBus.on<PostLikeEvent>().listen((event) {
       ///拿到event，更新下当前页面对应post的isLike状态
-      var post =
-          posts?.firstWhere((post) => post.id == event.id, orElse: () => null);
+      var post = posts.firstWhereOrNull((post) => post.id == event.id);
       post?.isLike = event.isLike;
       itemChange.id = event.id;
       itemChange.notifyListeners();
@@ -39,11 +39,11 @@ class PostListModel with ChangeNotifier {
   }
 
   ///加载数据
-  void loadData({VoidCallback callback}) {
+  void loadData({VoidCallback? callback}) {
     PostServer.instance().loadPosts().then((jsonList) {
       posts = jsonList.map((json) => PostBean.map(json)).toList();
       notifyListeners();
-      callback.call();
+      callback?.call();
     }).catchError((e) => print(e));
   }
 
@@ -56,6 +56,6 @@ class PostListModel with ChangeNotifier {
   @override
   void dispose() {
     super.dispose();
-    _eventDispose?.call();
+    _eventDispose.call();
   }
 }

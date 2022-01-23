@@ -6,7 +6,7 @@ final String eventBusDemo1Title = "自定义EventBus";
 MyEventBus1 _eventBus = new MyEventBus1();
 
 class EventBusDemoWidget1 extends StatefulWidget {
-  EventBusDemoWidget1({Key key}) : super(key: key);
+  EventBusDemoWidget1({Key? key}) : super(key: key);
 
   @override
   _EventBusDemoWidget1State createState() => _EventBusDemoWidget1State();
@@ -55,13 +55,13 @@ class EventA extends BaseEvent {}
 class EventB extends BaseEvent {}
 
 class ButtonWidget<T extends BaseEvent> extends StatelessWidget {
-  final T event;
+  late T? event ;
 
-  const ButtonWidget({Key key, this.event}) : super(key: key);
+  ButtonWidget({Key? key, this.event}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
+    return ElevatedButton(
       child: Text("increment"),
       onPressed: _increment,
     );
@@ -69,8 +69,8 @@ class ButtonWidget<T extends BaseEvent> extends StatelessWidget {
 
   void _increment() {
     if (event != null) {
-      event.count++;
-      print(event.count);
+      event?.count++;
+      print(event?.count);
       _eventBus.post(event);
     }
   }
@@ -85,7 +85,7 @@ class TextWidget<T> extends StatefulWidget {
 
 class _TextWidgetState<T> extends State<TextWidget<T>> {
   int _count = 0;
-  ISubscriber<T> _subscriber;
+  late ISubscriber<T> _subscriber;
 
   @override
   void initState() {

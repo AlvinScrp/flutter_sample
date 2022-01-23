@@ -19,13 +19,13 @@ main() async {
 }
 
 class WordSplitter {
-  StreamTransformer<String, String> _transformer;
+  StreamTransformer<String, String>? _transformer;
   StringBuffer _wordBuilder = new StringBuffer();
 
-  StreamTransformer transformer() {
+  StreamTransformer<String, String> transformer() {
     _transformer = StreamTransformer<String, String>.fromHandlers(
         handleData: _handleData, handleDone: _sinkWord);
-    return _transformer;
+    return _transformer!;
   }
 
   //One World One Dream

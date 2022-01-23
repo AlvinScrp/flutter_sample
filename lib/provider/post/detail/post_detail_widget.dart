@@ -3,16 +3,16 @@ import 'package:flutter_sample/provider/post/detail/post_detail_model.dart';
 import 'package:provider/provider.dart';
 
 class PostDetailWidget extends StatefulWidget {
-  final int id;
+  int id;
 
-  const PostDetailWidget({Key key, this.id}) : super(key: key);
+  PostDetailWidget({Key? key, required this.id}) : super(key: key);
 
   @override
   _PostDetailWidgetState createState() => _PostDetailWidgetState();
 }
 
 class _PostDetailWidgetState extends State<PostDetailWidget> {
-  PostDetailModel _detailModel;
+ late PostDetailModel _detailModel;
 
   @override
   void initState() {

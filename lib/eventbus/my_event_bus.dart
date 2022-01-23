@@ -19,16 +19,16 @@ class MyEventBus1 implements IEventBus {
   void register<T>(ISubscriber<T> subscriber) {
     Type type = typeOf<T>();
     if (!map.containsKey(type)) {
-      map[type] = new List();
+      map[type] =  List.empty();
     }
-    map[type].add(subscriber);
+    map[type]?.add(subscriber);
   }
 
   @override
   void unregister<T>(ISubscriber<T> subscriber) {
     Type type = typeOf<T>();
     if (map.containsKey(type)) {
-      map[type].remove(subscriber);
+      map[type]?.remove(subscriber);
     }
   }
 
@@ -37,13 +37,13 @@ class MyEventBus1 implements IEventBus {
     Type type = typeOf<T>();
     if (map.containsKey(type)) {
       var subscribers = map[type];
-      subscribers?.forEach((subscriber) => subscriber?.call(event));
+      subscribers?.forEach((subscriber) => subscriber.call(event));
     }
   }
 }
 
 class MyEventBus2 implements IEventBus {
-  List<Function> subscribers = new List();
+  List<Function> subscribers = List.empty();
 
   @override
   register<T>(ISubscriber<T> subscriber) {
@@ -62,7 +62,9 @@ class MyEventBus2 implements IEventBus {
   @override
   post<T>(T event) {
     var ints = subscribers.whereType<ISubscriber<T>>();
-    ints?.forEach((subscriber) => subscriber?.call(event));
+    for (var subscriber in ints) {
+      subscriber.call(event);
+    }
   }
 }
 

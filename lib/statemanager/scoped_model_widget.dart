@@ -42,7 +42,7 @@ class _ScopedModelWidgetState extends State<ScopedModelWidget> {
             Builder(
               builder: (context2) {
                 print("__TestButtonState build context:$context2}");
-                return RaisedButton(
+                return ElevatedButton(
                     child: Text(
                         "Increment (current:${ScopedModel.of<ShareModel>(context2, rebuildOnChange: true)?.count.toString()})"),
 //                    "Increment (current)"),

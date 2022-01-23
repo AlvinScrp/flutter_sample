@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'input_widget.dart';
 
 class InputDialog {
-  static Future<String> show(BuildContext context) async {
+  static Future<String?> show(BuildContext context) async {
     return Navigator.of(context).push(InputOverlay());
   }
 }
@@ -23,7 +23,7 @@ class InputOverlay extends ModalRoute<String> {
   Color get barrierColor => const Color(0x01000000);
 
   @override
-  String get barrierLabel => null;
+  String get barrierLabel => "";
 
   @override
   bool get maintainState => true;
