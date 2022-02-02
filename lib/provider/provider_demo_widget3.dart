@@ -18,9 +18,7 @@ class _ProviderDemoWidget3State extends State<ProviderDemoWidget3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(providerDemoTitle3),
-      ),
+      appBar: AppBar(title: const Text(providerDemoTitle3)),
       body: ChangeNotifierProvider<CountModel>(
         model: _countModel,
         child: Center(
@@ -28,17 +26,13 @@ class _ProviderDemoWidget3State extends State<ProviderDemoWidget3> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Builder(builder: (context1) {
-                return Text(
-                    "计数:${Provider.of<CountModel>(context1, true).count}（有依赖情况)");
+                return Text("计数:${Provider.of<CountModel>(context1, true).count}（有依赖情况)");
               }),
               Builder(builder: (context2) {
-                return Text(
-                    "计数:${Provider.of<CountModel>(context2, false).count}（无依赖情况)");
+                return Text("计数:${Provider.of<CountModel>(context2, false).count}（无依赖情况)");
               }),
-              ElevatedButton(
-                  child: Text("increment"),
-                  onPressed: () => _countModel.increment()),
-              Text(providerDemoIntroduction3),
+              ElevatedButton(child: const Text("increment"), onPressed: () => _countModel.increment()),
+              const Text(providerDemoIntroduction3),
             ],
           ),
         ),
@@ -52,7 +46,7 @@ class ChangeNotifierProvider<T extends ChangeNotifier> extends StatefulWidget {
 
   final T model;
 
-  ChangeNotifierProvider({required this.child,required this.model});
+  ChangeNotifierProvider({Key? key, required this.child, required this.model}) : super(key: key);
 
   @override
   _ChangeNotifierProviderState createState() => _ChangeNotifierProviderState();
@@ -89,18 +83,13 @@ class _ChangeNotifierProviderState extends State<ChangeNotifierProvider> {
 class Provider<T extends ChangeNotifier> extends InheritedWidget {
   final T model;
 
-  Provider({Key? key,required this.model,required Widget child}) : super(key: key, child: child);
+  Provider({Key? key, required this.model, required Widget child}) : super(key: key, child: child);
 
   static T of<T extends ChangeNotifier>(BuildContext context, bool depend) {
-     if (depend) {
-      return (context.dependOnInheritedWidgetOfExactType(aspect: Provider<T>)
-              as Provider<T>).model;
-    } else {
-      Provider<T> provider = (context
-          .getElementForInheritedWidgetOfExactType<Provider<T>>()
-          ?.widget) as Provider<T>;
-      return provider.model;
-    }
+    var provider = depend
+        ? context.dependOnInheritedWidgetOfExactType<Provider<ChangeNotifier>>()
+        : context.getElementForInheritedWidgetOfExactType<Provider<ChangeNotifier>>()?.widget;
+    return (provider as Provider<ChangeNotifier>).model as T;
   }
 
   @override

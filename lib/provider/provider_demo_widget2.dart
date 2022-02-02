@@ -22,29 +22,21 @@ class _ProviderDemoWidget2State extends State<ProviderDemoWidget2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(providerDemoTitle2),
-      ),
+      appBar: AppBar(title: const Text(providerDemoTitle2)),
       body: ChangeNotifierProvider(
         model: _countModel,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Text("计数:${_countModel.count}"),
               Builder(builder: (context1) {
-                return Text("计数:${_countModel.count}");
-              }),
-              Builder(builder: (context1) {
-                return Text(
-                    "计数:${CountProvider.of(context1, true).count}（有依赖情况)");
+                return Text("计数:${CountProvider.of(context1, true).count}（有依赖情况)");
               }),
               Builder(builder: (context2) {
-                return Text(
-                    "计数:${CountProvider.of(context2, false).count}（无依赖情况)");
+                return Text("计数:${CountProvider.of(context2, false).count}（无依赖情况)");
               }),
-              ElevatedButton(
-                  child: const Text("increment"),
-                  onPressed: () => _countModel.increment()),
+              ElevatedButton(child: const Text("increment"), onPressed: () => _countModel.increment()),
               const Text(providerDemoIntroduction2),
             ],
           ),
@@ -96,20 +88,13 @@ class _ChangeNotifierProviderState extends State<ChangeNotifierProvider> {
 class CountProvider extends InheritedWidget {
   final CountModel model;
 
-  CountProvider({Key? key, required this.model, required Widget child})
-      : super(key: key, child: child);
+  const CountProvider({Key? key, required this.model, required Widget child}) : super(key: key, child: child);
 
   static CountModel of(BuildContext context, bool depend) {
-    if (depend) {
-      return (context.dependOnInheritedWidgetOfExactType(aspect: CountProvider)
-              as CountProvider)
-          .model;
-    } else {
-      CountProvider provider = (context
-          .getElementForInheritedWidgetOfExactType<CountProvider>()
-          ?.widget) as CountProvider;
-      return provider.model;
-    }
+    var provider = depend
+        ? context.dependOnInheritedWidgetOfExactType<CountProvider>()
+        : context.getElementForInheritedWidgetOfExactType<CountProvider>()?.widget;
+    return (provider as CountProvider).model;
   }
 
   @override

@@ -19,7 +19,7 @@ class MyEventBus1 implements IEventBus {
   void register<T>(ISubscriber<T> subscriber) {
     Type type = typeOf<T>();
     if (!map.containsKey(type)) {
-      map[type] =  List.empty();
+      map[type] =  List.empty(growable: true);
     }
     map[type]?.add(subscriber);
   }
@@ -43,7 +43,7 @@ class MyEventBus1 implements IEventBus {
 }
 
 class MyEventBus2 implements IEventBus {
-  List<Function> subscribers = List.empty();
+  List<Function> subscribers = List.empty(growable: true);
 
   @override
   register<T>(ISubscriber<T> subscriber) {

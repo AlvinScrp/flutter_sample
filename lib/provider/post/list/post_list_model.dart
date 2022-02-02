@@ -9,7 +9,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:collection/collection.dart';
 
 class PostListModel with ChangeNotifier {
-  var posts = List<PostBean>.empty();
+  var posts = List<PostBean>.empty(growable: true);
 
   ///smartRefresher的刷新控制器
   RefreshController refreshController = RefreshController();

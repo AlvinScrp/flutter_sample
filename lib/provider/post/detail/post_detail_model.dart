@@ -4,7 +4,7 @@ import 'package:flutter_sample/provider/post/data/post_bean.dart';
 import 'package:flutter_sample/provider/post/data/post_server.dart';
 
 class PostDetailModel with ChangeNotifier {
- late PostBean post;
+ PostBean? post;
 
   initPost(int id) {
     PostServer.instance().getPostDetail(id).then((json) {
@@ -14,10 +14,10 @@ class PostDetailModel with ChangeNotifier {
   }
 
   likePost(bool toLike) {
-    PostServer.instance().like(post.id, toLike).then((result) {
+    PostServer.instance().like(post?.id??0, toLike).then((result) {
       if (result["success"]) {
-        post.isLike = toLike;
-        PostLikeEvent(post.id, toLike).fire();
+        post?.isLike = toLike;
+        PostLikeEvent(post?.id??0, toLike).fire();
       }
       notifyListeners();
     }).catchError((e) => print(e));

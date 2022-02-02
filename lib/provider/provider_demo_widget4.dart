@@ -16,14 +16,12 @@ class ProviderDemoWidget4 extends StatefulWidget {
 }
 
 class _ProviderDemoWidget4State extends State<ProviderDemoWidget4> {
-  CountModel _countModel = CountModel(0);
+  final CountModel _countModel = CountModel(0);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(providerDemoTitle4),
-      ),
+      appBar: AppBar(title: const Text(providerDemoTitle4)),
       body: ChangeNotifierProvider.value(
         value: _countModel,
         child: Center(
@@ -36,13 +34,10 @@ class _ProviderDemoWidget4State extends State<ProviderDemoWidget4> {
                 },
               ),
               Builder(builder: (context2) {
-                return Text(
-                    "计数:${Provider.of<CountModel>(context2, listen: false).count}（无依赖情况)");
+                return Text("计数:${Provider.of<CountModel>(context2, listen: false).count}（无依赖情况)");
               }),
-              ElevatedButton(
-                  child: Text("increment"),
-                  onPressed: () => _countModel.increment()),
-              Text(providerDemoIntroduction4),
+              ElevatedButton(child: const Text("increment"), onPressed: () => _countModel.increment()),
+              const Text(providerDemoIntroduction4),
             ],
           ),
         ),

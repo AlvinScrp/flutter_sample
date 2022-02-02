@@ -5,7 +5,7 @@ Stream<int> countStream(int to) async* {
 }
 
 List<int> countList(int to) {
-  List<int> list = List.empty();
+  List<int> list = List.empty(growable: true);
   for (int i = 0; i < to; i++) list.add(i);
   return list;
 }

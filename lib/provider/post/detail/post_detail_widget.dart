@@ -12,7 +12,7 @@ class PostDetailWidget extends StatefulWidget {
 }
 
 class _PostDetailWidgetState extends State<PostDetailWidget> {
- late PostDetailModel _detailModel;
+  late PostDetailModel _detailModel;
 
   @override
   void initState() {
@@ -35,7 +35,8 @@ class _PostDetailWidgetState extends State<PostDetailWidget> {
                     return Container();
                   }
                   return GestureDetector(
-                      onTap: () => model.likePost(!model.post.isLike),
+                      onTap: () =>
+                          model.likePost(!(model.post?.isLike ?? false)),
                       child: Icon(
                         Icons.favorite,
                         color: post.isLike ? Colors.red : Colors.white,

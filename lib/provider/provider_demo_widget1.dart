@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 const String providerDemoTitle1 = "Provider示例1";
-const String providerDemoIntroduction1 =
-    "\n\n用InheritedWidget保存数据\n以及访问InheritedWidget拿到数据";
+const String providerDemoIntroduction1 = "\n\n用InheritedWidget保存数据\n以及访问InheritedWidget拿到数据";
 
 class ProviderDemoWidget1 extends StatefulWidget {
   const ProviderDemoWidget1({Key? key}) : super(key: key);
@@ -28,14 +27,12 @@ class _ProviderDemoWidget1State extends State<ProviderDemoWidget1> {
             children: <Widget>[
               Builder(
                 builder: (context2) {
-                  CountProvider provider = (context2
-                      .getElementForInheritedWidgetOfExactType<CountProvider>()
-                      ?.widget) as CountProvider;
+                  /// 读取和显示计数
+                  CountProvider provider =
+                      (context2.getElementForInheritedWidgetOfExactType<CountProvider>()?.widget) as CountProvider;
                   return Text("计数:${provider.count}");
                 },
               ),
-
-              /// 读取和显示计数
               ElevatedButton(
                 child: const Text("increment"),
                 onPressed: () => setState(() => _count++),
@@ -52,8 +49,7 @@ class _ProviderDemoWidget1State extends State<ProviderDemoWidget1> {
 class CountProvider extends InheritedWidget {
   final int count;
 
-  const CountProvider({Key? key, required this.count, required Widget child})
-      : super(key: key, child: child);
+  const CountProvider({Key? key, required this.count, required Widget child}) : super(key: key, child: child);
 
   @override
   bool updateShouldNotify(CountProvider old) {
